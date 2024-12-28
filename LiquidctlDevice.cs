@@ -84,6 +84,7 @@ namespace FanControl.Liquidctl
 
             public void Set(float val)
             {
+                if (Value == val) return;
                 LiquidctlCLIWrapper.SetPump(_address, (int) val);
             }
 
