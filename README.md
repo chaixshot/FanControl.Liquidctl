@@ -6,11 +6,19 @@ This is a simple plugin that uses [liquidctl](https://github.com/liquidctl/liqui
 
 ## Installation
 
-1. Download lasted [release](https://github.com/chaixshot/FanControl.Liquidctl/releases)
-2. Fan Control > Settings > Instal Plugin... > Choose **FanControl.Liquidctl.zip**
+1. Download latest [release](https://github.com/chaixshot/FanControl.Liquidctl/releases/latest)
+2. Open Fan Control > Settings > Instal Plugin... > Choose **FanControl.Liquidctl.zip**
 3. Install [Python](https://www.python.org/downloads/) 3.9 or later
 4. Open Windows CMD and install **liquidctl** ```pip install liquidctl```
-5. Restart **Fan Control**
+5. Download [libusb](https://github.com/libusb/libusb/releases/latest) cop file ``libusb-*.*.*.7z > VS2022 > MS64 > dll > libusb-1.0.dll`` to ``C:\Windows\System32``
+7. Restart **Fan Control**
+
+## Fix Armoury Crate, ASUS AIO
+1. Press <kbd>WIN</kbd>+<kbd>R</kbd> to open Run and enter ``%localappdata%\Programs\Python\Python312\Lib\site-packages\liquidctl``
+2. Open all file with [Notepad++](https://notepad-plus-plus.org/downloads/)
+3. Press <kbd>Ctrl</kbd>+<kbd>F</kbd> in Notepad++ to remove degree sign ``°``
+![image](https://github.com/user-attachments/assets/79e1dc57-366c-463e-b7f6-b92bb9e935b2)
+4. Press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> to save all files.
 
 ## Setting up the developer environment
 
