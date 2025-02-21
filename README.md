@@ -8,7 +8,7 @@ This is a simple plugin that uses [liquidctl](https://github.com/liquidctl/liqui
 
 1. Download lasted [release](https://github.com/chaixshot/FanControl.Liquidctl/releases)
 2. Fan Control > Settings > Instal Plugin... > Choose **FanControl.Liquidctl.zip**
-3. Install Python 3.9 or later
+3. Install [Python](https://www.python.org/downloads/) 3.9 or later
 4. Open Windows CMD and install **liquidctl** ```pip install liquidctl```
 5. Restart **Fan Control**
 
