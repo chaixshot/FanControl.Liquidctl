@@ -6,7 +6,11 @@ This is a simple plugin that uses [liquidctl](https://github.com/liquidctl/liqui
 
 ## Installation
 
-Grab a release and unpack it to `Plugins` directory of your FanControl instalation. It contains Windows bundle of liquidctl.
+1. Download lasted [release](https://github.com/chaixshot/FanControl.Liquidctl/releases)
+2. Fan Control > Settings > Instal Plugin... > Choose **FanControl.Liquidctl.zip**
+3. Install Python 3.9 or later
+4. Open Windows CMD and install **liquidctl** ```pip install liquidctl```
+5. Restart **Fan Control**
 
 ## Setting up the developer environment
 
