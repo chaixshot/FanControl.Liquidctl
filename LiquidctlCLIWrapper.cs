@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using FanControl.Plugins;
 using Newtonsoft.Json.Linq;
 using System.Text;
+using System.Threading;
 
 
 namespace FanControl.Liquidctl
@@ -54,34 +55,42 @@ namespace FanControl.Liquidctl
 
         private static string LiquidctlCall(string arguments)
         {
-            Process process = new Process();
-
-            process.StartInfo.CreateNoWindow = true;
-            process.StartInfo.UseShellExecute = false;
-
-            process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.RedirectStandardError = true;
-
-            process.StartInfo.FileName = liquidctlexe;
-            process.StartInfo.Arguments = arguments;
-
-            process.Start();
-            process.WaitForExit();
-
-            string output = process.StandardOutput.ReadToEnd().ToString();
-
-            if (process.ExitCode != 0)
+            string output = "";
+            for (int retry = 0; retry < 10; retry++)
             {
-                throw new Exception($"-------------------------------\n" +
-                    $"liquidctl returned non-zero exit code {process.ExitCode}.\n" +
-                    $"Arguments:\n" + arguments + "\n"+
-                    $"Last stderr output:\n{process.StandardError.ReadToEnd()}" +
-                    $"-------------------------------");
-            }
 
+                Process process = new Process();
+
+                process.StartInfo.CreateNoWindow = true;
+                process.StartInfo.UseShellExecute = false;
+
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.RedirectStandardError = true;
+
+                process.StartInfo.FileName = liquidctlexe;
+                process.StartInfo.Arguments = arguments;
+
+                process.Start();
+                process.WaitForExit();
+
+                output = process.StandardOutput.ReadToEnd().ToString();
+
+                if (process.ExitCode == 0)
+                {
+                    break;
+                }
+                else if (retry >= 4)
+                {
+                    throw new Exception($"-------------------------------\n" +
+                        $"liquidctl returned non-zero exit code {process.ExitCode}.\n" +
+                        $"Arguments:\nliquidctl " + arguments + "\n" +
+                        $"Last stderr output:\n{process.StandardError.ReadToEnd()}" +
+                        $"-------------------------------");
+                }
+                Thread.Sleep(1000);
+            }
             return output;
         }
-
 
         // Code by akotulu
         // See https://github.com/jmarucha/FanControl.Liquidctl/pull/29/commits/145978bdf1c2d1a464b2a036b4fc26f559bb77dc#diff-d7a2c0cf4c270870ed263c55d2cd4fc41258347085a3cded3a78b48e73f78092
